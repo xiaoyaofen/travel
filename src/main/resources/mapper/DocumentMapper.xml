@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yaofen.mapper.DocumentMapper">
+    <select id="findDoc" resultType="com.yaofen.bean.Document">
+        select d.title,c.name,d.time,d.record,d.type from t_document d,t_client c where d.worker=c.id
+        <if test="time1 != null and time1 !=''">
+            and TO_DAYS(d.time)>= TO_DAYS(#{time1})
+        </if>
+        <if test="time2 != null and time2 !=''">
+            <![CDATA[
+            and TO_DAYS(d.time)<= TO_DAYS(#{time2})
+            ]]>
+        </if>
+        <if test="people != null and people !=''">
+            and c.name like concat('%',#{people},'%')
+        </if>
+        <if test="title != null and title !=''">
+            and d.title = #{title}
+        </if>
+        <if test="type != null and type !=''">
+            and d.type = #{type}
+        </if>
+        limit #{page},#{limit}
+    </select>
+    <select id="findCountDoc" resultType="java.lang.Integer">
+        select count(*) from t_document d,t_client c where d.worker=c.id
+        <if test="time1 != null and time1 !=''">
+            and TO_DAYS(d.time)>= TO_DAYS(#{time1})
+        </if>
+        <if test="time2 != null and time2 !=''">
+            <![CDATA[
+            and TO_DAYS(d.time)<= TO_DAYS(#{time2})
+            ]]>
+        </if>
+        <if test="people != null and people !=''">
+            and c.name like concat('%',#{people},'%')
+        </if>
+        <if test="title != null and title !=''">
+            and d.title = #{title}
+        </if>
+        <if test="type != null and type !=''">
+            and d.type = #{type}
+        </if>
+    </select>
+    <select id="getDoc" resultType="com.yaofen.bean.Document">
+        select d.title,c.name,d.time,d.record,d.type,d.count from t_document d,t_client c where d.worker=c.id and
+        d.state='已审核'
+        and d.title like concat('%',#{doc},'%') order by d.count desc
+    </select>
+    <insert id="addDocuemnt">
+        insert into t_document (title,record,type,state,worker,count,url) values
+        (#{title},#{record},#{type},'待审核',#{worker},'0',#{url})
+    </insert>
+    <select id="getDownloadDoc" resultType="com.yaofen.bean.Document">
+        select d.id,d.title,c.name,d.time,d.record,d.type from t_document d,t_client c where d.worker=c.id and
+        d.state='已审核'
+    </select>
+    <select id="findUrlById" resultType="java.lang.String">
+        select url from t_document where id=#{id}
+    </select>
+</mapper>
