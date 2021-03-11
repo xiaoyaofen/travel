@@ -29,6 +29,7 @@ public class ActionController {
         layuiData.setMsg("");
         layuiData.setCode(0);
         layuiData.setData(list);
+        System.out.println("hello");
         return new Gson().toJson(layuiData);
     }
 
