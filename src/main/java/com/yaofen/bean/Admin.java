@@ -3,21 +3,15 @@ package com.yaofen.bean;
 public class Admin {
     private int id;
     private String account;
-    private String pwd;
-    private String time;
-    private int roleid;
-    private String name;
+    private String password;
 
     public Admin() {
     }
 
-    public Admin(int id, String account, String pwd, String time, int roleid, String name) {
+    public Admin(int id, String account, String password) {
         this.id = id;
         this.account = account;
-        this.pwd = pwd;
-        this.time = time;
-        this.roleid = roleid;
-        this.name = name;
+        this.password = password;
     }
 
     public int getId() {
@@ -36,47 +30,11 @@ public class Admin {
         this.account = account;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public int getRoleid() {
-        return roleid;
-    }
-
-    public void setRoleid(int roleid) {
-        this.roleid = roleid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Admin{" +
-                "id=" + id +
-                ", account='" + account + '\'' +
-                ", pwd='" + pwd + '\'' +
-                ", time='" + time + '\'' +
-                ", roleid=" + roleid +
-                ", name='" + name + '\'' +
-                '}';
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

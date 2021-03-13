@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
-    <title>后台登录页</title>
+    <title>乡村旅游·爱您的家</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/style.css">
@@ -19,7 +19,7 @@
 <body>
 
 <div class="login-main">
-    <header class="layui-elip">后台文档系统</header>
+    <header class="layui-elip">乡村旅游·爱您的家</header>
     <form class="layui-form">
         <div class="layui-input-inline">
             <input type="text" name="account" id="account" required lay-verify="required" placeholder="用户名"
@@ -48,14 +48,11 @@
         var $ = layui.jquery;
 
         form.on('submit(login)', function (data) {
-            // console.log(data.field);
             var account = $("#account").val();
             var pwd = $("#password").val();
             $.ajax({
                 <%--url: '${pageContext.request.contextPath}/l?methodName=managelogin',--%>
                 url: '${pageContext.request.contextPath}/admin/login/' + account + '/' + pwd,
-                // data: "account=" + account + "&pwd=" + pwd,
-                dataType: 'text',
                 type: 'post',
                 success: function (data) {
                     layer.msg(data);

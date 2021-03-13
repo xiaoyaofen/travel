@@ -4,53 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yaofen.mapper.AdminMapper">
     <select id="login" resultType="com.yaofen.bean.Admin">
-        select * from t_admin where account = #{account} and pwd=#{pwd} limit 1;
+        select * from ly_admin where account = #{account} and password=#{password};
     </select>
-    <select id="checkAdmin" resultType="com.yaofen.bean.Admin">
-        select * from t_admin where account=#{account};
-    </select>
-    <delete id="del">
-        delete from t_admin where id=#{id}
-    </delete>
-    <insert id="addAdmin">
-        insert into t_admin (account,pwd,roleid) values (#{account},#{pwd},#{roleid})
-    </insert>
-    <select id="findAdmin" resultType="com.yaofen.bean.Admin">
-        select a.account,a.time,p.name from t_admin a,t_params p where a.roleid=p.value and p.type='worker'
-        <if test="time1 != null and time1 !=''">
-            and TO_DAYS(time)>= TO_DAYS(#{time1})
-        </if>
-        <if test="time2 != null and time2 !=''">
-            <![CDATA[
-            and TO_DAYS(time)<= TO_DAYS(#{time2})
-            ]]>
-        </if>
-        <if test="account != null and account !=''">
-            and account like concat('%',#{account},'%')
-        </if>
-        limit #{curPage},#{pageSize}
-    </select>
-    <select id="findCount" resultType="java.lang.Integer">
-        select count(*) from t_admin where 1=1
-        <if test="time1 != null and time1 !=''">
-            and TO_DAYS(time)>= TO_DAYS(#{time1})
-        </if>
-        <if test="time2 != null and time2 !=''">
-            <![CDATA[
-            and TO_DAYS(time)<= TO_DAYS(#{time2})
-            ]]>
-        </if>
-        <if test="account != null and account !=''">
-            and account like concat('%',#{account},'%')
-        </if>
-    </select>
-    <delete id="delAdmin">
-        delete from t_admin where account=#{account};
-    </delete>
-    <update id="fixAdmin">
-        update t_admin set account=#{newname},roleid=#{newlevel} where account=#{oldname};
-    </update>
-    <select id="getQuan" resultType="com.yaofen.bean.Params">
-        select id,name from t_params where type='worker'
-    </select>
+
 </mapper>

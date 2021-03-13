@@ -5,10 +5,10 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
-	http://www.springframework.org/schema/context  
-	http://www.springframework.org/schema/context/spring-context-3.1.xsd  
-	http://www.springframework.org/schema/mvc  
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
     <!--处理器配置
      自动扫描该包，使SpringMVC认为包下用了
@@ -77,25 +77,25 @@
         <property name="maxInMemorySize" value="40960"/>
     </bean>
 
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <!--1.拦截器只针对静态资源拦截+controller，动态资源，如jsp页面，不拦截-->
-            <!--2.对非本项目资源不进行拦截，如cdn样式js等，因为对这些资源的请求不通过本服务器-->
-            <!--3.WEB-INF目录下的jsp页面只能通过ModelAndView进行访问-->
-            <!--4.两个星才表示对所有地址进行拦截，包括control和css、js-->
-            <mvc:mapping path="/admin/*"/>
-            <mvc:exclude-mapping path="/admin/login/{account}/{pwd}"/>
-            <mvc:exclude-mapping path="/user/login"/>
-            <mvc:exclude-mapping path="/admin/addAdmin"/>
-            <mvc:exclude-mapping path="/static/**"/>
-            <bean class="com.yaofen.interceptor.LoginInterceptor"></bean>
-        </mvc:interceptor>
-        <mvc:interceptor>
-            <mvc:mapping path="/user/*"/>
-            <mvc:exclude-mapping path="/user/login"/>
-            <mvc:exclude-mapping path="/user/register"/>
-            <mvc:exclude-mapping path="/static/**"/>
-            <bean class="com.yaofen.interceptor.UserLoginInterceptor"></bean>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--&lt;!&ndash;1.拦截器只针对静态资源拦截+controller，动态资源，如jsp页面，不拦截&ndash;&gt;-->
+            <!--&lt;!&ndash;2.对非本项目资源不进行拦截，如cdn样式js等，因为对这些资源的请求不通过本服务器&ndash;&gt;-->
+            <!--&lt;!&ndash;3.WEB-INF目录下的jsp页面只能通过ModelAndView进行访问&ndash;&gt;-->
+            <!--&lt;!&ndash;4.两个星才表示对所有地址进行拦截，包括control和css、js&ndash;&gt;-->
+            <!--<mvc:mapping path="/admin/*"/>-->
+            <!--<mvc:exclude-mapping path="/admin/login/{account}/{pwd}"/>-->
+            <!--<mvc:exclude-mapping path="/user/login"/>-->
+            <!--<mvc:exclude-mapping path="/admin/addAdmin"/>-->
+            <!--<mvc:exclude-mapping path="/static/**"/>-->
+            <!--<bean class="com.yaofen.interceptor.LoginInterceptor"></bean>-->
+        <!--</mvc:interceptor>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/user/*"/>-->
+            <!--<mvc:exclude-mapping path="/user/login"/>-->
+            <!--<mvc:exclude-mapping path="/user/register"/>-->
+            <!--<mvc:exclude-mapping path="/static/**"/>-->
+            <!--<bean class="com.yaofen.interceptor.UserLoginInterceptor"></bean>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
 </beans>
