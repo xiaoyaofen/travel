@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/X-admin/css/font.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/X-admin/css/xadmin.css">
     <script src="${pageContext.request.contextPath}/layui/layui.js" charset="utf-8"></script>
-    <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/X-admin/js/xadmin.js"></script>
 
 </head>
@@ -48,19 +48,15 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
-                    <cite>会员管理</cite>
+                    <cite>列表管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('统计页面','../jsp/welcome1.jsp')">
+                        <a onclick="xadmin.add_tab('统计页面','../X-admin/welcome1.html')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>统计页面</cite></a>
                     </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('会员列表(静态表格)','../jsp/member-list.jsp')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员列表(静态表格)</cite></a>
-                    </li>
+
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe70b;</i>
@@ -68,18 +64,46 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
+                                <a onclick="xadmin.add_tab('会员列表(静态表格)','../jsp/member-list.jsp')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>会员列表(静态表格)</cite></a>
+                            </li>
+                            <li>
                                 <a onclick="xadmin.add_tab('会员删除','member-del.html')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>会员删除</cite></a>
                             </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('等级管理','member-list1.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>等级管理</cite></a>
-                            </li>
                         </ul>
                     </li>
-                </ul>
+
+                    <li>
+                        <a href="javascript:;" onclick="xadmin.add_tab('会员列表(静态表格)','../jsp/view-list.jsp')">
+                            <i class="iconfont">&#xe723;</i>
+                            <cite>乡村风景</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" onclick="xadmin.add_tab('会员列表(静态表格)','../jsp/story-list.jsp')">
+                            <i class="iconfont">&#xe723;</i>
+                            <cite>乡村故事</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" onclick="xadmin.add_tab('会员列表(静态表格)','../jsp/eat-list.jsp')">
+                            <i class="iconfont">&#xe723;</i>
+                            <cite>乡村特产</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" onclick="xadmin.add_tab('会员列表(静态表格)','../jsp/member-list.jsp')">
+                            <i class="iconfont">&#xe723;</i>
+                            <cite>乡村热点</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                    </li>
+                 </ul>
             </li>
             <%--<li>--%>
                 <%--<a href="javascript:;">--%>

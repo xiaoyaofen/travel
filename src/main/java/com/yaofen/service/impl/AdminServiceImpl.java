@@ -6,6 +6,8 @@ import com.yaofen.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("loginServiceImpl")
 public class AdminServiceImpl implements AdminService {
     @Autowired
@@ -18,6 +20,11 @@ public class AdminServiceImpl implements AdminService {
         admin.setPassword(pwd);
         admin = adminMapper.login(admin);
         return admin;
+    }
+
+    @Override
+    public List<User> userList(Integer page, Integer limit) {
+        return adminMapper.userList(page,limit);
     }
 
 
