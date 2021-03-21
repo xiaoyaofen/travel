@@ -37,7 +37,7 @@
                 <canvas id="canvas" width="100" height="43" autocomplete="off"></canvas>
             </div>
             <div class="layui-input-inline login-btn">
-                <button lay-submit lay-filter="login" class="layui-btn">登录</button>
+                <button lay-submit lay-filter="login" class="layui-btn">登录ss</button>s
             </div>
             <hr/>
         </form>
@@ -61,6 +61,7 @@
             var account = $("#account").val();
             var pwd = $("#password").val();
             var code = $("#code").val();
+            console.log(666)
             $.ajax({
                 url: '/admin/login',
                 data: "account=" + account + "&pwd=" + pwd + "&code=" + code + "&num=" + num,
@@ -79,6 +80,8 @@
                         draw(show_num);
                         num = show_num.join("");
                     }
+                },error: function () {
+                    console.log(666)
                 }
             })
             return false;
