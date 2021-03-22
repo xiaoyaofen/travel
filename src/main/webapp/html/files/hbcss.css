@@ -1,0 +1,90 @@
+/* CSS Document */
+@charset "utf-8";
+/*index-css */
+.toutiaoico{ width:117px;}
+.toutiaocon .ttpic{ float:left; width:100px; height:97px; overflow:hidden; margin-left:5px;}
+.toutiaocon .ttcon{ float:left; font-size:12px; color:#000; width:710px; line-height:24px; padding-left:20px;}
+.toutiaocon .ttcon h2{ font-size:24px; line-height:38px; color:#C84202; margin-bottom:10px;}
+.hdh{ background-color: #E3E3E3; padding:3px 20px; color:#333; font-size:15px; line-height:40px;}
+.hdh a:link{ color:#333; text-decoration:none;}
+.hdh a:visited{ color:#333; text-decoration:none;}
+.hdh a:hover{ color:#000; text-decoration:none;}
+
+.topn{ padding-top:10px; padding-bottom:15px;}
+.topnews{ width:570px;}
+.topnewslist{ width:404px;}
+
+.topnewslist ul li{ padding-top:10px; padding-bottom:10px; border-bottom:1px solid #CCC;}
+.topnewslist ul li h4{ font-size:20px; color:#134701; font-weight:bolder; line-height:2em;}
+.topnewslist ul li p{ padding-top:8px; padding-bottom:2px;}
+
+.dabiaoti{ background:url(jujiao.jpg) top left no-repeat; height:80px; margin-top:20px; margin-bottom:20px; text-align:center;}
+.dabiaoti h2{ font-size:30px; line-height:48px; font-weight:bolder;}
+.dabiaoti p{ color:#999; line-height:2em;}
+.ban1{ margin-top:0px; margin-bottom:10px;}
+.heng1{}
+.bt1{ background:url(btbg.jpg) no-repeat left top; border-bottom:4px solid #349201;}
+.bt1 h2{ font-size:20px; color:#FFF; line-height:2em; text-indent:1em;}
+.heng1 .difang{ line-height:3em; border-bottom:1px solid #d2d2d2}
+.heng1 .difang a{ margin-right:15px;}
+.heng1 .difang a:link{ color:#1E7401; text-decoration:none;}
+.heng1 .difang a:visited{ color:#1E7401; text-decoration:none;}
+.heng1 .difang a:hover{ color:#1E7401; text-decoration:underline;}
+.heng1 .listpic { float:left; width:688px; float:left; padding-bottom:10px;}
+.heng1 .listpic li{ float:left; margin-left:8px; width:160px; margin-top:12px; text-align:center;}
+.heng1 .listpic li a{  line-height:28px; text-decoration:none;}
+.heng1 .listpic .pick160{ width:160px; height:115px; overflow:hidden;}
+.heng1 .listnews{ float:right; width:300px; margin-right:10px; padding-top:5px;}
+.heng1 .listnews li{ border-bottom:1px solid #CCC; padding-bottom:10px;}
+.heng1 .listnews li .bt{ font-size:18px; color:#000; line-height:2em; }
+.heng1 .listnews li p{ line-height:2em; color:#333;}
+.banshileft{ width:715px; float:left; min-height:280px;}
+
+.mtop15{ margin- top:15px;}
+
+.huibg{ background:url(vidhui.png) bottom repeat-x ;  background-size:80%;  height:100%; width:100%; position:absolute; z-index:1;}
+.vidbt{ font-size:12px;  line-height:22px; position:absolute; left:10px; bottom:10px; color:#FFF; width:70%; z-index:2;}
+.vidbtn{ background:url(vidbtn.png); background-size:100%; width:20px; height:20px; position:absolute; right:15px; bottom:15px; z-index:3;}
+.piclist li{ width:170px; height:130px; float: left;overflow:hidden; margin-left:6px; margin-bottom:6px; position:relative;}
+.piclist{ margin-top:10px;}
+.l350{ float:left; width:350px; min-height:200px;}
+.lvbt{ border-top:2px solid #1E7401; border-bottom:1px solid #D6D6D6; height:42px; margin-bottom:8px;}
+.lvbt h3{ font-size:16px; text-indent:5px; line-height:42px; font-weight:bolder; color:#000; float:left;}
+.lvbt .more{ float:right; line-height:42px; padding-right:1em;}
+
+.newlistpic1{}
+.subnewpiconly li{ float:left; width:50%; overflow:hidden;}
+.subpick{ height:99px; overflow:hidden;}
+.subpick img{ margin:5px;}
+.subnewpick{ float:left; width:50%; height:99px; overflow:hidden;}
+.subnewpick img{ margin:5px;}
+.subnewname{ float:left; width:46%; padding-left:4%;}
+.newlist1{ width:100%; }
+.newlist1 li{ line-height:32px; width:100%; border-bottom:1px dashed #CCC; height:32px; overflow:hidden; display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background:url(img/leftjt.gif) 5px 50% no-repeat;text-indent:18px;}
+.lm{ border:1px solid #D2D2D2; margin-bottom:20px;}
+.lmtitle{ background:url(img/lmt.jpg) repeat-x; height:38px;}
+.lmcon{ min-height:140px;}
+
+.tab_con{ display:none;}
+.tab_conbox{overflow:hidden;}
+.tabs{height: 38px;padding-left:20px; float:left;}
+.tabs li{height:38px;line-height:38px;float:left;border-left:none;margin-bottom: -1px;overflow: hidden;position: relative;}
+.tabs li a {display: block;padding: 0 20px; font-size:14px; font-weight:bolder;  border-right: 1px solid #ECECEC;outline: none;}
+.tabs li a:hover {background: #fff; text-decoration:none; font-size:14px;}	
+.tabs .thistab,.tabs .thistab a:hover{background:url(img/xiajiantou.gif) bottom center no-repeat #fff;}
+.tab_con {padding:5px;font-size:12px;}
+.lmlist { float:left; width:232px; height:150px; margin-left:12px; margin-top:10px; margin-bottom:10px; float:left; overflow:hidden;}
+.bsleftpic{ float:left; width:250px; margin-left:10px; margin-top:10px;}
+.bsleftpic p{ line-height:2em; line-height:2em; color:#000; margin-top:10px;}
+.bsleftlist{ float:left; width:410px; margin-top:10px; margin-left:15px;}
+.bsnewlist{ height:30px; border-bottom:1px dashed #CCC; overflow:hidden; line-height:30px;}
+
+.r270{ width:270px; float:right;}
+.index_greenbt1{ background:url(lvse.jpg); height:37px; line-height:36px; text-indent:1em; color:#FFF; font-size:18px;}
+.index_huibt1{ background:url(huibg.jpg); height:37px; line-height:37px; font-size:12px; text-indent:15px;}
+.right_greenk{ border-left:1px solid #D2D2D2;border-right:1px solid #D2D2D2;border-bottom:1px solid #D2D2D2;border-top:2px solid #1E7401; min-height:280px;}
+.moregreen{ float:right; padding-right:10px; line-height:37px; font-size:12px;}
+
+.newlist1{ width:100%; }
+.newlist1 li{ line-height:32px; width:100%; border-bottom:1px dashed #CCC; height:32px; overflow:hidden; display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background:url(leftjt.gif) 5px 50% no-repeat;text-indent:18px;}
+

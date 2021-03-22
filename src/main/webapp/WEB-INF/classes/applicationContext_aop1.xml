@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--    基于代理-->
+    <!--     创建增强-->
+    <bean id="sleepAdvice" class="com.yaofen.aop.SleepAdvice"></bean>
+    <!--    目标类-->
+    <bean id="student" class="com.yaofen.aop.Student"></bean>
+
+    <!--    定义切点-->
+    <bean id="sleepPointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+        <property name="pattern" value=".*sleep"></property>
+    </bean>
+
+    <!--    切面=通知+切点-->
+    <bean id="sleepQiemian" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="advice" ref="sleepAdvice"></property>
+        <property name="pointcut" ref="sleepPointcut"></property>
+    </bean>
+
+    <!--定义代理-->
+    <bean id="studentProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="student"></property>
+        <property name="interceptorNames" value="sleepQiemian"></property>
+    </bean>
+
+</beans>
