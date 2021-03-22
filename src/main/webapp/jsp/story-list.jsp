@@ -6,8 +6,7 @@
     <title>欢迎页面-X-admin2.2</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/X-admin/css/font.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/X-admin/css/xadmin.css">
     <script src="${pageContext.request.contextPath}/X-admin/lib/layui/layui.js" charset="utf-8"></script>
@@ -26,8 +25,7 @@
             <a>
               <cite>导航元素</cite></a>
           </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
-       onclick="location.reload()" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
 </div>
 <div class="layui-fluid">
@@ -37,14 +35,13 @@
                 <div class="layui-card-body ">
                     <form class="layui-form layui-col-space5">
                         <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input" autocomplete="off" name="account" id="account1" placeholder="请输入账号">
+                            <input class="layui-input"  autocomplete="off" placeholder="请输入乡村名称" name="name" id="name">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="sex" placeholder="请输入性别" autocomplete="off" class="layui-input" id="sex1">
+                            <input type="text" name="img"  placeholder="请输入图片路径" autocomplete="off" class="layui-input" id="img">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <button class="layui-btn" lay-submit="" lay-filter="sreach" id="sreach"><i
-                                    class="layui-icon">&#xe615;</i></button>
+                            <button class="layui-btn"  lay-submit="" lay-filter="sreach" id="sreach"><i class="layui-icon">&#xe615;</i></button>
                         </div>
                         <div class="layui-inline layui-show-xs-block">
                             <button type="button" class="layui-btn layui-btn-sm" id="addBtn"><i class="layui-icon"></i></button>
@@ -64,7 +61,7 @@
 <script>
 
 
-    layui.use(['laydate', 'table', 'form', 'layer'], function () {
+    layui.use(['laydate','table','form','layer'], function(){
         var laydate = layui.laydate;
         var form = layui.form;
         var table = layui.table;
@@ -73,49 +70,33 @@
         //执行一个 table 实例
         table.render({
             elem: '#demo'
-            , height: 420
-            , url: '/admin/adminList' //数据接口
-            , title: '会员信息'
-            , page: {
-                layout: ['prev', 'page', 'next', 'count', 'limit', 'refresh', 'skip']//自定义布局顺序
-                , groups: 5 	//最多几个跳页按钮
-                , first: false //不显示首页
-                , last: false //不显示尾页
+            ,height: 420
+            ,url: '/country/getCountryStory' //数据接口
+            ,title: '乡村故事信息'
+            ,page:{
+                layout: [ 'prev', 'page', 'next', 'count','limit', 'refresh', 'skip']//自定义布局顺序
+                ,groups:5 	//最多几个跳页按钮
+                ,first: false //不显示首页
+                ,last: false //不显示尾页
             }
             , limit: 5	//初始  每页几条数据
             , limits: [5, 10, 15]	//可以选择的 每页几条数据
             , id: "testReload"
-            , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
-            , defaultToolbar: ['filter', 'exports']
-            , totalRow: true //开启合计行
-            , cols: [
+            ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,defaultToolbar: ['filter', 'exports']
+            ,totalRow: true //开启合计行
+            ,cols: [
                 [ //表头
-                    {field: 'id', title: '序号', width: 200}
-                    , {field: 'account', title: '账号', width: 300}
-                    , {field: 'email', title: '邮箱', width: 150}
-                    , {field: 'tel', title: '电话', width: 300}
-                    , {field: 'sex', title: '性别', width: 200}
-                    , {field: 'state', title: '审核状态', width: 200}
-                    , {fixed: 'right', fixed: 'right', title: '操作', width: 200, align: 'center', toolbar: '#barDemo'}
+                    {field: 'id',title: '序号',width:200}
+                    ,{field: 'name', title: '乡村名称', width: 300}
+                    ,{field: 'img', title: '图片路径', width: 150}
+                    ,{field: 'story', title: '相关故事', width: 200}
+                    ,{field: 'click', title: '点赞次数', width: 200}
+                    ,{field: 'createTime', title: '创建时间', width: 200}
+                    ,{fixed: 'right' ,fixed: 'right' ,title: '操作', width: 200, align:'center', toolbar: '#barDemo'}
                 ]
             ]
         });
-
-        $("#sreach").on('click',function () {
-            var account=$("#account1").val();
-            var sex=$("#sex1").val();
-            table.reload('testReload',{
-                url:'/admin/adminList',
-                where:{
-                    account:account,
-                    sex:sex
-                },
-                page: {
-                    curr: 1 //重新从第 1 页开始
-                }
-            })
-            return false;
-        })
 
         table.on('tool(demo)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
             var data = obj.data; //获得当前行数据
@@ -123,26 +104,20 @@
             var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
 
             if (layEvent === 'detail') { //查看
-                $("#hidename").html(data.id);
-                $("#lingyu").val(data.scope);
-                layer.open({
-                    //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
-                    type: 1,
-                    title: "子级知识点添加",
-                    area: ['420px', '330px'],
-                    content: $("#popUpdateTest"),//引用的弹出层的页面层的方式加载修改界面表单
-                });
+
+
+
             } else if (layEvent === 'del') { //删除
                 layer.confirm('真的删除行么', function (index) {
                     $.ajax({
-                        url: '/user/delUser',
+                        url: '/country/delCountryStory',
                         data: data,
                         dataType: 'text',
                         type: 'get',
                         success: function (data) {
                             layer.msg(data);
                             if (data == 'success') {
-                                location.href="${pageContext.request.contextPath}/jsp/member-list.jsp";
+                                location.href="${pageContext.request.contextPath}/jsp/story-list.jsp";
                             }
                         }
                     })
@@ -150,16 +125,14 @@
                     //向服务端发送删除指令
                 });
             } else if (layEvent === 'edit') { //编辑
-                $("#hideid").html(data.id);
-                $("#account").val(data.account);
-                $("#email").val(data.email);
-                $("#tel").val(data.tel);
-                $("#sex").val(data.sex);
-                // $("#time").val(data.pPriceTime);
+                $("#hideid").val(data.id);
+                $("#name1").val(data.name);
+                $("#img1").val(data.img);
+                $("#story1").val(data.story);
                 layer.open({
                     //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                     type: 1,
-                    title: "用户信息更改",
+                    title: "乡村故事信息更改",
                     area: ['420px', '400px'],
                     content: $("#fixKnow"),//引用的弹出层的页面层的方式加载修改界面表单
                     success: function (layero, index) {
@@ -174,66 +147,78 @@
         });
 
         form.on('submit(demo12)', function (data) {
-            var id = $("#hideid").html();
-            var account=$("#account").val();
-            var email=$("#email").val();
-            var sex=$("#sex").val();
-            var tel=$("#tel").val();
-            var flag=confirm("确定修改用户信息吗？");
+            var name = $("#name1").val();
+            var img=$("#img1").val();
+            var time=$("#time1").val();
+            var story=$("#story1").val();
+            var id=$("#hideid").val();
+            var flag=confirm("确定修改乡村故事信息吗？");
             if (flag){
                 $.ajax({
-                    url: '/user/updateUserInfo',
-                    data:  {"account": account, "email": email, "id": id,"sex":sex,"tel":tel},
+                    url: '/country/updateCountryStory',
+                    data:  {"name": name, "img": img, "id":id,"time":time,"story":story},
                     dataType: 'text',
                     type: 'get',
                     success: function (data) {
                         layer.msg(data);
                         if (data == 'success') {
-                            location.href="${pageContext.request.contextPath}/jsp/member-list.jsp";
+                            location.href="${pageContext.request.contextPath}/jsp/story-list.jsp";
                         }
                     }
                 })
             }
             return false;
-
         })
 
+        $("#sreach").on('click',function () {
+            var name=$("#name").val();
+            var img=$("#img").val();
+            table.reload('testReload',{
+                url:'/country/getCountryStory',
+                where:{
+                    name:name,
+                    img:img
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            })
+            return false;
+        })
 
         $("#addBtn").on("click", function () {
             layer.open({
                 //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                 type: 1,
-                title: "新增用户",
+                title: "新增乡村故事",
                 area: ['420px', '400px'],
                 content: $("#addUser")
             });
         });
 
         form.on('submit(demo13)', function (data) {
-            var account = $("#account2").val();
-            var tel=$("#tel2").val();
-            var sex=$("#sex2").val();
-            var email=$("#email2").val();
+            var name = $("#name2").val();
+            var img=$("#img2").val();
+            var time=$("#time2").val();
+            var story=$("#story2").val();
             $.ajax({
-                url: '/user/addUser',
-                data:  {"account": account, "tel": tel,"sex":sex,"email":email},
+                url: '/country/addCountryStory',
+                data:  {"name": name, "img": img,"time":time,"story":story},
                 dataType: 'text',
                 type: 'get',
                 success: function (data) {
                     layer.msg(data);
                     if (data == 'success') {
-                        location.href="${pageContext.request.contextPath}/jsp/member-list.jsp";
+                        location.href="${pageContext.request.contextPath}/jsp/story-list.jsp";
                     }
                 }
             })
             return false;
-
         })
+
     });
 
-
 </script>
-
 <script type="text/jsp" id="barDemo">
     <div class="layui-btn-container">
 
@@ -245,7 +230,6 @@
             <i class="layui-icon">&#xe640;</i>
         </a>
 
-
     </div>
 </script>
 
@@ -254,34 +238,32 @@
     <div class="layui-col-md10">
         <form class="layui-form layui-from-pane" action="" style="margin-top:20px">
             <div class="layui-form-item">
-                <label class="layui-form-label">账号:</label>
+                <label class="layui-form-label">乡村名称:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="account" required lay-verify="required" autocomplete="off"
-                           class="layui-input" id="account">
+                    <input type="text" name="name1" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="name1">
                 </div>
                 <span id="hideid" hidden></span>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">邮箱:</label>
+                <label class="layui-form-label">图片路径:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="email" required lay-verify="required" autocomplete="off"
-                           class="layui-input" id="email">
+                    <input type="text" name="img1" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="img1">
                 </div>
             </div>
-
             <div class="layui-form-item">
-                <label class="layui-form-label">电话:</label>
+                <label class="layui-form-label">相关故事:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="tel" required lay-verify="required" autocomplete="off"
-                           class="layui-input" id="tel">
+                    <input type="text" name="story1" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="story1">
                 </div>
             </div>
-
             <div class="layui-form-item">
-                <label class="layui-form-label">性别:</label>
+                <label class="layui-form-label">创建时间:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="sex" required lay-verify="required" autocomplete="off"
-                           class="layui-input" id="sex">
+                    <input type="date" name="time1" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="time1">
                 </div>
             </div>
 
@@ -300,31 +282,31 @@
     <div class="layui-col-md10">
         <form class="layui-form layui-from-pane" action="" style="margin-top:20px">
             <div class="layui-form-item">
-                <label class="layui-form-label">账号：</label>
+                <label class="layui-form-label">乡村名称:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="account2" autocomplete="off" placeholder="请输入账号" class="layui-input" id="account2" required lay-verify="required">
+                    <input type="text" name="name2" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="name2">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">邮箱：</label>
+                <label class="layui-form-label">图片路径:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="email2" required lay-verify="required" autocomplete="off"
-                           class="layui-input" id="email2" placeholder="请输入邮箱">
-                </div>
-            </div>
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">电话：</label>
-                <div class="layui-input-block">
-                    <input type="text" name="tel2" required lay-verify="required" autocomplete="off"
-                           class="layui-input" id="tel2" placeholder="请输入电话">
+                    <input type="text" name="img2" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="img2">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">性别：</label>
+                <label class="layui-form-label">相关故事:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="sex2" required lay-verify="required" autocomplete="off"
-                           class="layui-input" id="sex2" placeholder="请输入性别">
+                    <input type="text" name="story2" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="story2">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">创建时间:</label>
+                <div class="layui-input-block">
+                    <input type="date" name="time2" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="time2">
                 </div>
             </div>
             <div class="layui-form-item" style="margin-top:40px">
@@ -336,4 +318,5 @@
         </form>
     </div>
 </div>
+
 </html>

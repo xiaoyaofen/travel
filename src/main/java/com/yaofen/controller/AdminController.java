@@ -1,5 +1,6 @@
 package com.yaofen.controller;
 
+import com.google.gson.Gson;
 import com.yaofen.bean.*;
 import com.yaofen.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +10,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
-    private AdminService loginService;
+    private AdminService adminService;
 
     @RequestMapping(value = "/login", produces = "text/plain;charset=utf-8")
     @ResponseBody
@@ -25,7 +27,7 @@ public class AdminController {
         String pwd = request.getParameter("pwd");
         String code = request.getParameter("code");
         if (num.toUpperCase().equals(code.toUpperCase())) {
-            Admin admin = loginService.login(account, pwd);
+            Admin admin = adminService.login(account, pwd);
             if (admin != null) {
                 request.getSession().setAttribute("admin", admin);
                 return "登录成功";
@@ -42,7 +44,25 @@ public class AdminController {
         String account = request.getParameter("account");
         request.getSession().setAttribute("account", account);
         return "AdminMenu";
+    }
 
+    @RequestMapping(value = "/adminList", produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String adminList(HttpServletRequest request,HttpServletRequest resp){
+        String page = request.getParameter("page");
+        Integer limit = Integer.parseInt(request.getParameter("limit"));
+        String account = request.getParameter("account");
+        String sex = request.getParameter("sex");
+        System.out.println(account+" "+sex);
+        Integer page1 = Integer.parseInt(page);
+        page1 = (page1 - 1) * limit;
+        List<User> list = adminService.userList(page1,limit,account,sex);
+        LayuiData layuiData = new LayuiData();
+        layuiData.setMsg("");
+        layuiData.setCode(0);
+        layuiData.setCount(100);
+        layuiData.setData(list);
+        return new Gson().toJson(layuiData);
     }
 
 }
