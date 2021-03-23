@@ -23,7 +23,9 @@ public class PageController {
     @RequestMapping(value = "/getViewList", produces = "text/plain;charset=utf-8")
     @ResponseBody
     public ModelAndView getViewList(HttpServletRequest request, HttpServletRequest resp){
-        List<Country> list = countryService.getCountryView(0,100);
+        String name = request.getParameter("name");
+        String img = request.getParameter("img");
+        List<Country> list = countryService.getCountryView(name,img,0,100);
         ModelAndView modelAndView = new ModelAndView("page1");
         modelAndView.addObject("viewList",list);
         return modelAndView;
@@ -32,7 +34,9 @@ public class PageController {
     @RequestMapping(value = "/getCountryEat", produces = "text/plain;charset=utf-8")
     @ResponseBody
     public ModelAndView getCountryEat(HttpServletRequest request, HttpServletRequest resp){
-        List<Country> list = countryService.getCountryEat(0,100);
+        String name = request.getParameter("name");
+        String img = request.getParameter("img");
+        List<Country> list = countryService.getCountryEat(name,img,0,100);
         ModelAndView modelAndView = new ModelAndView("page1");
         modelAndView.addObject("viewList",list);
         return modelAndView;
@@ -41,7 +45,9 @@ public class PageController {
     @RequestMapping(value = "/getCountryStory", produces = "text/plain;charset=utf-8")
     @ResponseBody
     public ModelAndView getCountryStory(HttpServletRequest request, HttpServletRequest resp){
-        List<Country> list = countryService.getCountryStory(0,100);
+        String name = request.getParameter("name");
+        String img = request.getParameter("img");
+        List<Country> list = countryService.getCountryStory(name,img,0,100);
         ModelAndView modelAndView = new ModelAndView("page1");
         modelAndView.addObject("viewList",list);
         return modelAndView;
