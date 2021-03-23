@@ -35,7 +35,7 @@
                 <div class="layui-card-body ">
                     <form class="layui-form layui-col-space5">
                         <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="请输入乡村名称" name="name" id="name">
+                            <input class="layui-input"  autocomplete="off" placeholder="请输入乡村风景名称" name="name" id="name">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
                             <input type="text" name="img"  placeholder="请输入图片路径" autocomplete="off" class="layui-input" id="img">
@@ -71,8 +71,8 @@
         table.render({
             elem: '#demo'
             ,height: 420
-            ,url: '/country/getCountryStory' //数据接口
-            ,title: '乡村故事信息'
+            ,url: '/country/getCountryNew' //数据接口
+            ,title: '乡村风景信息'
             ,page:{
                 layout: [ 'prev', 'page', 'next', 'count','limit', 'refresh', 'skip']//自定义布局顺序
                 ,groups:5 	//最多几个跳页按钮
@@ -88,12 +88,12 @@
             ,cols: [
                 [ //表头
                     {field: 'id',title: '序号',width:200}
-                    ,{field: 'name', title: '乡村名称', width: 300}
+                    ,{field: 'name', title: '乡村新闻', width: 300}
                     ,{field: 'img', title: '图片路径', width: 150}
-                    ,{field: 'story', title: '相关故事', width: 200}
                     ,{field: 'click', title: '点赞次数', width: 200}
                     ,{field: 'createTime', title: '创建时间', width: 200}
-                    ,{fixed: 'right' ,fixed: 'right' ,title: '操作', width: 200, align:'center', toolbar: '#barDemo'}
+                    ,{field: 'belong', title: '所属乡镇', width: 200}
+                    ,{fixed: 'right' ,title: '操作', width: 200, align:'center', toolbar: '#barDemo'}
                 ]
             ]
         });
@@ -110,14 +110,14 @@
             } else if (layEvent === 'del') { //删除
                 layer.confirm('真的删除行么', function (index) {
                     $.ajax({
-                        url: '/country/delCountryStory',
+                        url: '/country/delCountryNew',
                         data: data,
                         dataType: 'text',
                         type: 'get',
                         success: function (data) {
                             layer.msg(data);
                             if (data == 'success') {
-                                location.href="${pageContext.request.contextPath}/jsp/story-list.jsp";
+                                location.href="${pageContext.request.contextPath}/jsp/news-list.jsp";
                             }
                         }
                     })
@@ -128,11 +128,23 @@
                 $("#hideid").val(data.id);
                 $("#name1").val(data.name);
                 $("#img1").val(data.img);
-                $("#story1").val(data.story);
+                $.ajax({
+                    url: '/country/findCountryName',
+                    // data: data,
+                    dataType: 'json',
+                    type: 'get',
+                    success: function (data) {
+                        $("#countryid1").append("<opyion value=''></opyion>")
+                        $(data).each(function (i,n) {
+                            $("#countryid1").append("<option value='"+n.name+"'>"+n.name+"</option>")
+                        })
+                        form.render('select')
+                    }
+                })
                 layer.open({
                     //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                     type: 1,
-                    title: "乡村故事信息更改",
+                    title: "乡村风景信息更改",
                     area: ['420px', '400px'],
                     content: $("#fixKnow"),//引用的弹出层的页面层的方式加载修改界面表单
                     success: function (layero, index) {
@@ -146,35 +158,34 @@
             }
         });
 
-        form.on('submit(demo12)', function (data) {
-            var name = $("#name1").val();
-            var img=$("#img1").val();
-            var time=$("#time1").val();
-            var story=$("#story1").val();
-            var id=$("#hideid").val();
-            var flag=confirm("确定修改乡村故事信息吗？");
-            if (flag){
-                $.ajax({
-                    url: '/country/updateCountryStory',
-                    data:  {"name": name, "img": img, "id":id,"time":time,"story":story},
-                    dataType: 'text',
-                    type: 'get',
-                    success: function (data) {
-                        layer.msg(data);
-                        if (data == 'success') {
-                            location.href="${pageContext.request.contextPath}/jsp/story-list.jsp";
-                        }
-                    }
-                })
-            }
-            return false;
-        })
+        $("#addBtn").on("click", function () {
+            $.ajax({
+                url: '/country/findCountryName',
+                // data: data,
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+                    $("#countryid2").append("<opyion value=''></opyion>")
+                    $(data).each(function (i,n) {
+                        $("#countryid2").append("<option value='"+n.name+"'>"+n.name+"</option>")
+                    })
+                    form.render('select')
+                }
+            })
+            layer.open({
+                //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                type: 1,
+                title: "新增乡村热点",
+                area: ['420px', '400px'],
+                content: $("#addUser")
+            });
+        });
 
         $("#sreach").on('click',function () {
             var name=$("#name").val();
             var img=$("#img").val();
             table.reload('testReload',{
-                url:'/country/getCountryStory',
+                url:'/country/getCountryNew',
                 where:{
                     name:name,
                     img:img
@@ -186,30 +197,44 @@
             return false;
         })
 
-        $("#addBtn").on("click", function () {
-            layer.open({
-                //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
-                type: 1,
-                title: "新增乡村故事",
-                area: ['420px', '400px'],
-                content: $("#addUser")
-            });
-        });
+        form.on('submit(demo12)', function (data) {
+            var name = $("#name1").val();
+            var img=$("#img1").val();
+            var time=$("#time1").val();
+            var country=$("#countryid1").val();
+            var id=$("#hideid").val();
+            var flag=confirm("确定修改乡村新闻信息吗？");
+            if (flag){
+                $.ajax({
+                    url: '/country/updateCountryNew',
+                    data:  {"name": name, "img": img, "id":id,"time":time,"country":country},
+                    dataType: 'text',
+                    type: 'get',
+                    success: function (data) {
+                        layer.msg(data);
+                        if (data == 'success') {
+                            location.href="${pageContext.request.contextPath}/jsp/news-list.jsp";
+                        }
+                    }
+                })
+            }
+            return false;
+        })
 
         form.on('submit(demo13)', function (data) {
             var name = $("#name2").val();
             var img=$("#img2").val();
             var time=$("#time2").val();
-            var story=$("#story2").val();
+            var country=$("#countryid2").val();
             $.ajax({
-                url: '/country/addCountryStory',
-                data:  {"name": name, "img": img,"time":time,"story":story},
+                url: '/country/addCountryNew',
+                data:  {"name": name, "img": img,"time":time,"country":country},
                 dataType: 'text',
                 type: 'get',
                 success: function (data) {
                     layer.msg(data);
                     if (data == 'success') {
-                        location.href="${pageContext.request.contextPath}/jsp/story-list.jsp";
+                        location.href="${pageContext.request.contextPath}/jsp/news-list.jsp";
                     }
                 }
             })
@@ -219,6 +244,7 @@
     });
 
 </script>
+
 <script type="text/jsp" id="barDemo">
     <div class="layui-btn-container">
 
@@ -238,7 +264,7 @@
     <div class="layui-col-md10">
         <form class="layui-form layui-from-pane" action="" style="margin-top:20px">
             <div class="layui-form-item">
-                <label class="layui-form-label">乡村名称:</label>
+                <label class="layui-form-label">乡村新闻标题:</label>
                 <div class="layui-input-block">
                     <input type="text" name="name1" required lay-verify="required" autocomplete="off"
                            class="layui-input" id="name1">
@@ -252,18 +278,21 @@
                            class="layui-input" id="img1">
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">相关故事:</label>
-                <div class="layui-input-block">
-                    <input type="text" name="story1" required lay-verify="required" autocomplete="off"
-                           class="layui-input" id="story1">
-                </div>
-            </div>
+
             <div class="layui-form-item">
                 <label class="layui-form-label">创建时间:</label>
                 <div class="layui-input-block">
                     <input type="date" name="time1" required lay-verify="required" autocomplete="off"
                            class="layui-input" id="time1">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属乡镇:</label>
+                <div class="layui-inline layui-show-xs-block">
+                    <select name="countryid1" id="countryid1" lay-verify="select">
+
+                    </select>
                 </div>
             </div>
 
@@ -282,31 +311,32 @@
     <div class="layui-col-md10">
         <form class="layui-form layui-from-pane" action="" style="margin-top:20px">
             <div class="layui-form-item">
-                <label class="layui-form-label">乡村名称:</label>
+                <label class="layui-form-label">新闻标题：</label>
                 <div class="layui-input-block">
-                    <input type="text" name="name2" required lay-verify="required" autocomplete="off"
-                           class="layui-input" id="name2">
+                    <input type="text" name="name2" autocomplete="off" placeholder="请输入乡村风景名称" class="layui-input" id="name2" required lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">图片路径:</label>
+                <label class="layui-form-label">图片路径：</label>
                 <div class="layui-input-block">
                     <input type="text" name="img2" required lay-verify="required" autocomplete="off"
-                           class="layui-input" id="img2">
+                           class="layui-input" id="img2" placeholder="请输入图片路径">
                 </div>
             </div>
+
             <div class="layui-form-item">
-                <label class="layui-form-label">相关故事:</label>
-                <div class="layui-input-block">
-                    <input type="text" name="story2" required lay-verify="required" autocomplete="off"
-                           class="layui-input" id="story2">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">创建时间:</label>
+                <label class="layui-form-label">创建时间：</label>
                 <div class="layui-input-block">
                     <input type="date" name="time2" required lay-verify="required" autocomplete="off"
-                           class="layui-input" id="time2">
+                           class="layui-input" id="time2" >
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属乡镇：</label>
+                <div class="layui-input-block">
+                    <select name="countryid2" id="countryid2" lay-verify="select">
+
+                    </select>
                 </div>
             </div>
             <div class="layui-form-item" style="margin-top:40px">
@@ -318,5 +348,4 @@
         </form>
     </div>
 </div>
-
 </html>

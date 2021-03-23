@@ -37,7 +37,7 @@
                 <canvas id="canvas" width="100" height="43" autocomplete="off"></canvas>
             </div>
             <div class="layui-input-inline login-btn">
-                <button lay-submit lay-filter="login" class="layui-btn">登录ss</button>s
+                <button lay-submit lay-filter="login" class="layui-btn">登录</button>
             </div>
             <hr/>
         </form>

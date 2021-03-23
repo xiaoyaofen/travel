@@ -37,18 +37,17 @@
                 <div class="layui-card-body ">
                     <form class="layui-form layui-col-space5">
                         <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input" autocomplete="off" placeholder="开始日" name="start" id="start">
+                            <input class="layui-input" autocomplete="off" name="account" id="account1" placeholder="请输入账号">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input" autocomplete="off" placeholder="截止日" name="end" id="end">
+                            <input type="text" name="sex" placeholder="请输入性别" autocomplete="off" class="layui-input" id="sex1">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="username" placeholder="请输入用户名" autocomplete="off"
-                                   class="layui-input">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <button class="layui-btn" lay-submit="" lay-filter="sreach"><i
+                            <button class="layui-btn" lay-submit="" lay-filter="sreach" id="sreach"><i
                                     class="layui-icon">&#xe615;</i></button>
+                        </div>
+                        <div class="layui-inline layui-show-xs-block">
+                            <button type="button" class="layui-btn layui-btn-sm" id="addBtn"><i class="layui-icon"></i></button>
                         </div>
                     </form>
                 </div>
@@ -66,32 +65,6 @@
 
 
     layui.use(['laydate', 'table', 'form', 'layer'], function () {
-        //     var laydate = layui.laydate;
-        //     var  form = layui.form;
-        //
-        //
-        //     // 监听全选
-        //     form.on('checkbox(checkall)', function(data){
-        //
-        //         if(data.elem.checked){
-        //             $('tbody input').prop('checked',true);
-        //         }else{
-        //             $('tbody input').prop('checked',false);
-        //         }
-        //         form.render('checkbox');
-        //     });
-        //
-        //     //执行一个laydate实例
-        //     laydate.render({
-        //         elem: '#start' //指定元素
-        //     });
-        //
-        //     //执行一个laydate实例
-        //     laydate.render({
-        //         elem: '#end' //指定元素
-        //     });
-        //
-        //
         var laydate = layui.laydate;
         var form = layui.form;
         var table = layui.table;
@@ -105,12 +78,13 @@
             , title: '会员信息'
             , page: {
                 layout: ['prev', 'page', 'next', 'count', 'limit', 'refresh', 'skip']//自定义布局顺序
-                , limit: 5	//初始  每页几条数据
-                , limits: [5, 10, 15]	//可以选择的 每页几条数据
                 , groups: 5 	//最多几个跳页按钮
                 , first: false //不显示首页
                 , last: false //不显示尾页
             }
+            , limit: 5	//初始  每页几条数据
+            , limits: [5, 10, 15]	//可以选择的 每页几条数据
+            , id: "testReload"
             , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
             , defaultToolbar: ['filter', 'exports']
             , totalRow: true //开启合计行
@@ -126,82 +100,240 @@
                 ]
             ]
         });
+
+        $("#sreach").on('click',function () {
+            var account=$("#account1").val();
+            var sex=$("#sex1").val();
+            table.reload('testReload',{
+                url:'/admin/adminList',
+                where:{
+                    account:account,
+                    sex:sex
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            })
+            return false;
+        })
+
+        table.on('tool(demo)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+
+            if (layEvent === 'detail') { //查看
+                $("#hidename").html(data.id);
+                $("#lingyu").val(data.scope);
+                layer.open({
+                    //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                    type: 1,
+                    title: "子级知识点添加",
+                    area: ['420px', '330px'],
+                    content: $("#popUpdateTest"),//引用的弹出层的页面层的方式加载修改界面表单
+                });
+            } else if (layEvent === 'del') { //删除
+                layer.confirm('真的删除行么', function (index) {
+                    $.ajax({
+                        url: '/user/delUser',
+                        data: data,
+                        dataType: 'text',
+                        type: 'get',
+                        success: function (data) {
+                            layer.msg(data);
+                            if (data == 'success') {
+                                location.href="${pageContext.request.contextPath}/jsp/member-list.jsp";
+                            }
+                        }
+                    })
+
+                    //向服务端发送删除指令
+                });
+            } else if (layEvent === 'edit') { //编辑
+                $("#hideid").html(data.id);
+                $("#account").val(data.account);
+                $("#email").val(data.email);
+                $("#tel").val(data.tel);
+                $("#sex").val(data.sex);
+                // $("#time").val(data.pPriceTime);
+                layer.open({
+                    //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                    type: 1,
+                    title: "用户信息更改",
+                    area: ['420px', '400px'],
+                    content: $("#fixKnow"),//引用的弹出层的页面层的方式加载修改界面表单
+                    success: function (layero, index) {
+                        layui.form.render();
+                    }
+                });
+
+
+            } else if (layEvent === 'LAYTABLE_TIPS') {
+                layer.alert('Hi，头部工具栏扩展的右侧图标。');
+            }
+        });
+
+        form.on('submit(demo12)', function (data) {
+            var id = $("#hideid").html();
+            var account=$("#account").val();
+            var email=$("#email").val();
+            var sex=$("#sex").val();
+            var tel=$("#tel").val();
+            var flag=confirm("确定修改用户信息吗？");
+            if (flag){
+                $.ajax({
+                    url: '/user/updateUserInfo',
+                    data:  {"account": account, "email": email, "id": id,"sex":sex,"tel":tel},
+                    dataType: 'text',
+                    type: 'get',
+                    success: function (data) {
+                        layer.msg(data);
+                        if (data == 'success') {
+                            location.href="${pageContext.request.contextPath}/jsp/member-list.jsp";
+                        }
+                    }
+                })
+            }
+            return false;
+
+        })
+
+
+        $("#addBtn").on("click", function () {
+            layer.open({
+                //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                type: 1,
+                title: "新增用户",
+                area: ['420px', '400px'],
+                content: $("#addUser")
+            });
+        });
+
+        form.on('submit(demo13)', function (data) {
+            var account = $("#account2").val();
+            var tel=$("#tel2").val();
+            var sex=$("#sex2").val();
+            var email=$("#email2").val();
+            $.ajax({
+                url: '/user/addUser',
+                data:  {"account": account, "tel": tel,"sex":sex,"email":email},
+                dataType: 'text',
+                type: 'get',
+                success: function (data) {
+                    layer.msg(data);
+                    if (data == 'success') {
+                        location.href="${pageContext.request.contextPath}/jsp/member-list.jsp";
+                    }
+                }
+            })
+            return false;
+
+        })
     });
 
-    // /*用户-停用*/
-    // function member_stop(obj,id){
-    //     layer.confirm('确认要停用吗？',function(index){
-    //
-    //         if($(obj).attr('title')=='启用'){
-    //
-    //             //发异步把用户状态进行更改
-    //             $(obj).attr('title','停用')
-    //             $(obj).find('i').html('&#xe62f;');
-    //
-    //             $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-    //             layer.msg('已停用!',{icon: 5,time:1000});
-    //
-    //         }else{
-    //             $(obj).attr('title','启用')
-    //             $(obj).find('i').html('&#xe601;');
-    //
-    //             $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-    //             layer.msg('已启用!',{icon: 5,time:1000});
-    //         }
-    //
-    //     });
-    // }
-
-    // /*用户-删除*/
-    // function member_del(obj,id){
-    //     layer.confirm('确认要删除吗？',function(index){
-    //         //发异步删除数据
-    //         $(obj).parents("tr").remove();
-    //         layer.msg('已删除!',{icon:1,time:1000});
-    //     });
-    // }
-
-
-    // function delAll (argument) {
-    //     var ids = [];
-    //
-    //     // 获取选中的id
-    //     $('tbody input').each(function(index, el) {
-    //         if($(this).prop('checked')){
-    //             ids.push($(this).val())
-    //         }
-    //     });
-    //
-    //     layer.confirm('确认要删除吗？'+ids.toString(),function(index){
-    //         //捉到所有被选中的，发异步进行删除
-    //         layer.msg('删除成功', {icon: 1});
-    //         $(".layui-form-checked").not('.header').parents('tr').remove();
-    //     });
-    // }
 
 </script>
 
 <script type="text/jsp" id="barDemo">
     <div class="layui-btn-container">
 
-        <%--<a class="layui-btn layui-btn-xs" lay-event="detail">增加</a>--%>
-
-        <a title="编辑" href="javascript:;" lay-event="detail">
+        <a title="编辑" href="javascript:;" lay-event="edit">
             <i class="layui-icon">&#xe642;</i>
         </a>
 
-        <%--<a  title="修改密码" href="javascript:;">--%>
-            <%--<i class="layui-icon">&#xe631;</i>--%>
-        <%--</a>--%>
-
-        <a title="删除"  href="javascript:;">
+        <a title="删除"  href="javascript:;" lay-event="del">
             <i class="layui-icon">&#xe640;</i>
         </a>
 
-        <%--<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>--%>
-
-        <%--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>--%>
 
     </div>
 </script>
+
+<!--修改界面-->
+<div class="layui-row" id="fixKnow" style="display:none;">
+    <div class="layui-col-md10">
+        <form class="layui-form layui-from-pane" action="" style="margin-top:20px">
+            <div class="layui-form-item">
+                <label class="layui-form-label">账号:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="account" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="account">
+                </div>
+                <span id="hideid" hidden></span>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="email" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="email">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">电话:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="tel" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="tel">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sex" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="sex">
+                </div>
+            </div>
+
+            <div class="layui-form-item" style="margin-top:40px">
+                <div class="layui-input-block">
+                    <button class="layui-btn  layui-btn-submit " lay-submit="" lay-filter="demo12" id="surefix1">确认修改
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--新增界面-->
+<div class="layui-row" id="addUser" style="display:none;">
+    <div class="layui-col-md10">
+        <form class="layui-form layui-from-pane" action="" style="margin-top:20px">
+            <div class="layui-form-item">
+                <label class="layui-form-label">账号：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="account2" autocomplete="off" placeholder="请输入账号" class="layui-input" id="account2" required lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="email2" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="email2" placeholder="请输入邮箱">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">电话：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="tel2" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="tel2" placeholder="请输入电话">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sex2" required lay-verify="required" autocomplete="off"
+                           class="layui-input" id="sex2" placeholder="请输入性别">
+                </div>
+            </div>
+            <div class="layui-form-item" style="margin-top:40px">
+                <div class="layui-input-block">
+                    <button class="layui-btn  layui-btn-submit " lay-submit="" lay-filter="demo13" id="surefix2">确认新增
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 </html>

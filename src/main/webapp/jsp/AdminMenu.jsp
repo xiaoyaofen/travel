@@ -98,7 +98,7 @@
                     </li>
 
                     <li>
-                        <a href="javascript:;" onclick="xadmin.add_tab('会员列表(静态表格)','../jsp/member-list.jsp')">
+                        <a href="javascript:;" onclick="xadmin.add_tab('会员列表(静态表格)','../jsp/news-list.jsp')">
                             <i class="iconfont">&#xe723;</i>
                             <cite>乡村热点</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>

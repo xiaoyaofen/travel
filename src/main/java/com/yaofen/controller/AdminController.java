@@ -51,9 +51,12 @@ public class AdminController {
     public String adminList(HttpServletRequest request,HttpServletRequest resp){
         String page = request.getParameter("page");
         Integer limit = Integer.parseInt(request.getParameter("limit"));
+        String account = request.getParameter("account");
+        String sex = request.getParameter("sex");
+        System.out.println(account+" "+sex);
         Integer page1 = Integer.parseInt(page);
         page1 = (page1 - 1) * limit;
-        List<User> list = adminService.userList(page1,limit);
+        List<User> list = adminService.userList(page1,limit,account,sex);
         LayuiData layuiData = new LayuiData();
         layuiData.setMsg("");
         layuiData.setCode(0);

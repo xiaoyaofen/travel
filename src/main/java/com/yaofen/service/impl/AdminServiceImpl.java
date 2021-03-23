@@ -23,8 +23,23 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<User> userList(Integer page, Integer limit) {
-        return adminMapper.userList(page,limit);
+    public List<User> userList(Integer page, Integer limit,String account,String sex) {
+        return adminMapper.userList(page,limit,account,sex);
+    }
+
+    @Override
+    public void updateUserInfo(String account, String email, String sex, String tel, String id) {
+        adminMapper.updateUserInfo(account,email,sex,tel,id);
+    }
+
+    @Override
+    public void addUser(String account, String email, String sex, String tel) {
+        adminMapper.addUser(account,email,sex,tel);
+    }
+
+    @Override
+    public void delUser(String id) {
+        adminMapper.delUser(id);
     }
 
 
