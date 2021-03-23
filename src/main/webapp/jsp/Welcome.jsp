@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: BOSSliu666
@@ -44,8 +45,11 @@
 <body>
 <link rel="stylesheet" type="text/css" href=" ../html/files/style(1).css">
 <link rel="stylesheet" type="text/css" href=" ../html/files/main.css">
-<link rel="stylesheet" type="text/css" href=" ../html/files/public.css">
+<%--<link rel="stylesheet" type="text/css" href=" ../html/files/public.css">--%>
 <link rel="stylesheet" type="text/css" href=" ../html/files/hbcss.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/X-admin/css/xadmin.css">
+<%--<link rel="stylesheet" href="${pageContext.request.contextPath}/X-admin/css/read.min.css">--%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/X-admin/js/xadmin.js"></script>
 <script src=" ../html/files/sity_data.js"></script>
 
 <!---1--->
@@ -53,11 +57,18 @@
 <div class="top1">
     <div class="wp clearfix">
         <div class="fl" style="font-size:12px;">
-
-            <a href="http://www.ganjiyihuo.com/passport.html" mini-login="login">
-                <span class="login_ico denglu_ico"></span>登录</a>  |
-
-            <a href="http://www.ganjiyihuo.com/passport-signup-member.html">注册</a>  | <a href="http://cn.ganjiyihuo.com/">返回主站</a>
+            <a  onclick="xadmin.open('登陆','${pageContext.request.contextPath}/jsp/user-login.jsp',470,250)">登录</a>
+          <%--  <a href="http://www.ganjiyihuo.com/passport.html" mini-login="login">
+                <span class="login_ico denglu_ico"></span>登录</a>
+                |
+                <a href="http://www.ganjiyihuo.com/passport-signup-member.html">注册</a>  | <a href="http://cn.ganjiyihuo.com/">返回主站</a>--%>
+            | <a onclick="xadmin.open('注册账号','${pageContext.request.contextPath}/jsp/user-add.jsp',600,400)">注册</a>
+            <c:if test="${userLogin!=null}">
+                | <a>${userLogin.account}</a>
+            </c:if>
+            <c:if test="${userLogin==null}">
+                | <a>未登录</a>
+            </c:if>
 
         </div>
 
@@ -82,6 +93,7 @@
                     width: 100ps;
                     position: absolute;
                     visibility: hidden;
+
                 }
                 -->
             </style>
@@ -201,8 +213,8 @@
 
         <ul>
             <table width="1100" border="0" align="center" cellpadding="0" cellspacing="0" style="height: 100%">
-                <tbody><tr>
-                    <td><li><a  title="index_one.jsp" onclick="pageTurn(this)">网站首页</a></li>
+                <tbody><tr style="margin: auto"><%--style="margin-left: 500px;"--%>
+                    <td><li><a  title="index_one.jsp" onclick="pageTurn(this)" style="margin-left: 500px;" >网站首页</a></li>
                         <li><a  title="/page/getViewList" onclick="pageTurn(this)">乡村美景</a></li>
                         <li><a  title="/page/getCountryEat" onclick="pageTurn(this)">当地特产</a></li>
                         <li><a  title="/page/getCountryStory" onclick="pageTurn(this)">乡村热点</a></li>

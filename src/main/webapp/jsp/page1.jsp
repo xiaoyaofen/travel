@@ -65,7 +65,7 @@
 
 
         <div class="hlgd-title">
-            <div class="hlgdttxt"><a href="http://cn.ganjiyihuo.com/list.asp?id=4">乡村美景</a></div>
+            <div class="hlgdttxt"><a href="/page/getViewList">乡村美景</a></div>
             <hr>
         </div>
 
@@ -82,7 +82,7 @@
                     <dl>
                         <dt class="dis">
                             <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093">
-                                <img width="250" height="165" border="0" alt="${item.name}" src=" ../html/files/nian.jpg">
+                                <img width="250" height="165" border="0" alt="${item.name}" src="${item.img}">
                             </a>
                         </dt>
                         <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093"></a>
@@ -112,7 +112,7 @@
                 <dl>
                         <dt class="dis">
                             <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093">
-                                <img width="250" height="165" border="0" alt="汶川阿坝的神仙村简直太美了，可惜少有人知道" src=" ../html/files/nian.jpg">
+                                <img width="250" height="165" border="0" alt="汶川阿坝的神仙村简直太美了，可惜少有人知道" src="../X-admin/images/wuzhenyejing.jpg">
                             </a>
                         </dt>
                         <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093"></a>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yaofen.mapper.UserMapper">
+    <select id="login" resultType="com.yaofen.bean.User">
+        select * from ly_user where tel = #{tel} and password=#{password};
+    </select>
+
+    <insert id="addUser" parameterType="java.util.HashMap">
+        INSERT into ly_user (account,sex,tel,password)
+        values(#{userName},#{userSex},#{userPhone},#{userPass})
+    </insert>
+</mapper>

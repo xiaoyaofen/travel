@@ -79,7 +79,7 @@
                         <dl>
                             <dt class="dis">
                                 <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093">
-                                    <img width="250" height="165" border="0" alt="${item.name}" src=" ../html/files/nian.jpg">
+                                    <img width="250" height="165" border="0" alt="${item.name}" src="${item.img}">
                                 </a>
                             </dt>
                             <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093"></a>
