@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yaofen.mapper.CountryMapper">
+    <select id="getCountryStory" resultType="com.yaofen.bean.Country">
+        select * from ly_country limit #{page},#{limit};
+    </select>
+
+    <select id="getCountryEat" resultType="com.yaofen.bean.Country">
+        select ce.*,ct.name as belong from ly_countryeat ce,ly_country ct where ce.country_id=ct.id limit #{page},#{limit};
+    </select>
+
+    <select id="getCountryView" resultType="com.yaofen.bean.Country">
+        select cv.*,ct.name as belong from ly_countryview cv,ly_country ct where cv.country_id=ct.id limit #{page},#{limit};
+    </select>
+</mapper>
