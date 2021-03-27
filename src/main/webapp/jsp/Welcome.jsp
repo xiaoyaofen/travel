@@ -14,7 +14,7 @@
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 <script src="${pageContext.request.contextPath}/layui/layui.js" type="text/javascript"></script>
-
+<script  src="${pageContext.request.contextPath}/layui/jframe.js"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
 <meta name="format-detection" content="telephone=no,email=no,address=no">
 
@@ -217,7 +217,7 @@
                     <td><li><a  title="index_one.jsp" onclick="pageTurn(this)" style="margin-left: 500px;" >网站首页</a></li>
                         <li><a  title="/page/getViewList" onclick="pageTurn(this)">乡村美景</a></li>
                         <li><a  title="/page/getCountryEat" onclick="pageTurn(this)">当地特产</a></li>
-                        <li><a  title="/page/getCountryStory" onclick="pageTurn(this)">乡村热点</a></li>
+                        <li><a  title="/page/getCountryNew" onclick="pageTurn(this)">乡村热点</a></li>
                         <li><a  title="/page/getCountryStory" onclick="pageTurn(this)">村镇领导</a></li>
                     </td>
                 </tr>
@@ -242,10 +242,7 @@
 <script>
 
     ////////////////////////////////////////////////修改界面
-    function  pageTurn(node) {
-        iframe = document.getElementById("iframe");
-        iframe.src=node.title;
-    }
+
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function(){
         var element = layui.element;
@@ -289,7 +286,6 @@
 
     </div>
 </div>
-
 
 </body>
 </html>

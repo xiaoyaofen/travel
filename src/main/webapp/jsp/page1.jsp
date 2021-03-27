@@ -15,7 +15,7 @@
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 <script src="${pageContext.request.contextPath}/layui/layui.js" type="text/javascript"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/layui/jframe.js"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
 <meta name="format-detection" content="telephone=no,email=no,address=no">
 
@@ -38,7 +38,7 @@
 <link rel="stylesheet" type="text/css" href=" ../html/files/list.css">
 <link rel="stylesheet" type="text/css" href=" ../html/files/right.css">
 
-<!--<base target="_blank">--><base href="." target="_blank">
+<!--<base  >--><base href="."  >
 <script type="text/javascript" src=" ../html/files/qrcode.js"></script>
 
 <script src=" ../html/files/ti_u_5d92464c9a3c5f94.js"></script>
@@ -65,7 +65,7 @@
 
 
         <div class="hlgd-title">
-            <div class="hlgdttxt"><a href="/page/getViewList">乡村美景</a></div>
+            <div class="hlgdttxt"><a href="/page/getViewList"> </a></div>
             <hr>
         </div>
 
@@ -81,25 +81,25 @@
                 <div class="hlgd-box">
                     <dl>
                         <dt class="dis">
-                            <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093">
+                            <a   href="${pageContext.request.contextPath}/page/getResource?type=1&id=${item.id}" onclick="pageRead(this)">
                                 <img width="250" height="165" border="0" alt="${item.name}" src="${item.img}">
                             </a>
                         </dt>
-                        <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093"></a>
+                        <a   href="${pageContext.request.contextPath}/page/getResource?type=1&id=${item.id}" onclick="pageRead(this)"></a>
                         <dd class="">
-                            <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093"></a>
+                            <a  href="${pageContext.request.contextPath}/page/getResource?type=1&id=${item.id}" onclick="pageRead(this)"></a>
                             <h3>
-                                <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093">
+                                <a   href="${pageContext.request.contextPath}/page/getResource?type=1&id=${item.id}" onclick="pageRead(this)">
                                 <span class="dj">
-                                乡村美景
+
                                 </span>
                                 </a>
-                                <a href="http://cn.ganjiyihuo.com/show.asp?id=1093"><b>${item.name}</b></a>
+                                <a href="${pageContext.request.contextPath}/page/getResource?type=1&id=${item.id}" onclick="pageRead(this)"><b>${item.name}</b></a>
                             </h3>
 
                             <p> ${item.detail} </p>
                             <p>
-                                    ${item.createTime}   &nbsp;&nbsp;&nbsp;        浏览量：${item.click}
+                                    ${item.createTime}   &nbsp;&nbsp;&nbsp;        浏览量：${item.click}    &nbsp;&nbsp;&nbsp;        点赞量<i class="layui-icon layui-icon-praise"></i>：${item.goodNum}
                             </p>
                         </dd>
                     </dl>
@@ -108,43 +108,16 @@
             </e:forEach>
 
 
-            <div class="hlgd-box">
-                <dl>
-                        <dt class="dis">
-                            <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093">
-                                <img width="250" height="165" border="0" alt="汶川阿坝的神仙村简直太美了，可惜少有人知道" src="../X-admin/images/wuzhenyejing.jpg">
-                            </a>
-                        </dt>
-                        <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093"></a>
-                    <dd class="">
-                            <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093"></a>
-                        <h3>
-                            <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093">
-                                <span class="dj">
-                                乡村美景
-                                </span>
-                             </a>
-                            <a href="http://cn.ganjiyihuo.com/show.asp?id=1093"><b></b></a>
-                        </h3>
 
-                        <p>
-                            “云端上的村落”萝卜寨是世界上最大、最古老的黄泥羌寨古寨旖旎风光依旧不瘦，引来无数游客青睐及喜爱，他们亲切的称之为“神仙村”萝卜寨建筑相当特别，很有特色古色古香的古强债黄泥巴墙是他的特点适合拍照的很，..
-                        </p>
-                        <p>
-                            2018/11/16 10:05:40
-                        </p>
-                    </dd>
-                </dl>
-            </div>
 
             <%-- <div class="hlgd-box">
                 <dl>
                     <dt class="dis">
-                        <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1094">
+                        <a   href="http://cn.ganjiyihuo.com/show.asp?id=1094">
                             <img width="250" height="165" border="0" alt="中国这条“普通”的国道，最美最低调" src=" ../html/files/nian.jpg">
-                        </a></dt><a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1094">
-                </a><dd class=""><a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1094">
-                </a><h3><a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1094">
+                        </a></dt><a   href="http://cn.ganjiyihuo.com/show.asp?id=1094">
+                </a><dd class=""><a   href="http://cn.ganjiyihuo.com/show.asp?id=1094">
+                </a><h3><a   href="http://cn.ganjiyihuo.com/show.asp?id=1094">
                 <span class="dj">
                 乡村美景
                 </span>
@@ -158,7 +131,7 @@
                         2018/11/16 10:06:30
                     </p>
                 </dd></dl>
-            </div>--%>
+            </div>--%>r
 
         </div>
 
@@ -167,17 +140,31 @@
 
 <script>
 
-    ////////////////////////////////////////////////修改界面
-    function  pageTurn(node) {
-        iframe = document.getElementById("iframe");
-        iframe.src=node.title;
-    }
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function(){
         var element = layui.element;
 
         //…
     });
+
+
+    function pageRead(){
+       /* $.ajax({
+            url:$("#path").val()+"page/getResource?type=1&id=${item.id}",
+            data:data.field,
+            method:'post',
+            dataType:'text',
+            success:function (data) {
+                if (data=="登陆成功"){
+                    layer.msg("登陆成功！");
+
+                }else{
+                    layer.msg(data);
+                }
+            }
+        });*/
+    }
+
 </script>
 
 

@@ -46,4 +46,13 @@ public interface CountryMapper {
     public void addCountryNew(@Param("name") String name,@Param("img") String img,@Param("time") String time,@Param("countryid") String countryid);
 
     public void delCountryNew(@Param("id") String id);
+
+    public List<Country> getResource(@Param("id") String id,@Param("type") String type);
+
+    public List<Country> getResourceList(@Param("type") String type );
+
+    public void updateCountryClick(@Param("id") String id,@Param("type") String type);
+
+    public void updateCountryGood(@Param("id") String id,@Param("type") String type);
+
 }

@@ -7,6 +7,22 @@
         select * from ly_admin where account = #{account} and password=#{password};
     </select>
     <select id="userList" resultType="com.yaofen.bean.User">
-        select * from ly_user limit #{page},#{limit};
+        select * from ly_user where 1=1
+        <if test="account!=null and account!=''">
+            and account like concat('%',#{account},'%')
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex =#{sex}
+        </if>
+         limit #{page},#{limit};
     </select>
+    <update id="updateUserInfo">
+        update ly_user set account=#{account},email=#{email},tel=#{tel},sex=#{sex} where id=#{id}
+    </update>
+    <insert id="addUser">
+        insert into ly_user (account,password,email,tel,sex,state) values (#{account},"123456",#{email},#{tel},#{sex},1);
+    </insert>
+    <delete id="delUser">
+        delete from ly_user where id=#{id}
+    </delete>
 </mapper>

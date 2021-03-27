@@ -10,11 +10,17 @@ public class Country {
     private String countryId;
     private String detail;
     private String belong;
+    private Integer goodNum;
 
     public Country() {
     }
 
-    public Country(Integer id, String name, String img, String story, String click, String createTime, String countryId, String detail, String belong) {
+
+    public Integer getGoodNum() {
+        return goodNum;
+    }
+
+    public Country(Integer id, String name, String img, String story, String click, String createTime, String countryId, String detail, String belong, Integer goodNum) {
         this.id = id;
         this.name = name;
         this.img = img;
@@ -24,6 +30,11 @@ public class Country {
         this.countryId = countryId;
         this.detail = detail;
         this.belong = belong;
+        this.goodNum = goodNum;
+    }
+
+    public void setGoodNum(Integer goodNum) {
+        this.goodNum = goodNum;
     }
 
     public Integer getId() {

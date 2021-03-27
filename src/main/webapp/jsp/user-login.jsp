@@ -97,8 +97,8 @@
                         method:'post',
                         dataType:'text',
                         success:function (data) {
-                            if (data=="成功"){
-                                layer.msg("登陆成功！!");
+                            if (data=="登陆成功"){
+                                layer.msg("登陆成功！");
                                 //关闭当前frame可以对父窗口进行刷新
                                 setTimeout(function(){
                                     console.log("我在！！！")
@@ -123,5 +123,6 @@
                 s.parentNode.insertBefore(hm, s);
             })();</script>
     </body>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 
 </html>
