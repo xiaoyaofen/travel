@@ -42,4 +42,13 @@ public interface CountryService {
     public void addCountryNew(String name,String img,String time,String countryid);
 
     public void delCountryNew(String id);
+
+
+    public  List<Country> getResource(String id,String type);
+
+    public List<Country> getResourceList(String type);
+
+    public void updateCountryClick(String id,String type);
+
+    public void updateCountryGood(String id,String type);
 }

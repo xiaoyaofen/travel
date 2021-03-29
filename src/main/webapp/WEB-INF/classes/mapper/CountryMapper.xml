@@ -4,14 +4,176 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yaofen.mapper.CountryMapper">
     <select id="getCountryStory" resultType="com.yaofen.bean.Country">
-        select * from ly_country limit #{page},#{limit};
+        select * from ly_country where 1=1
+        <if test="name!=null and name!=''">
+            and name like concat('%',#{name},'%')
+        </if>
+        <if test="img!=null and img!=''">
+            and img like concat('%',#{img},'%')
+        </if>
+        limit #{page},#{limit};
     </select>
 
-    <select id="getCountryEat" resultType="com.yaofen.bean.Country">
-        select ce.*,ct.name as belong from ly_countryeat ce,ly_country ct where ce.country_id=ct.id limit #{page},#{limit};
+    <select id="findCountryName" resultType="com.yaofen.bean.Country">
+        select distinct name from ly_country;
     </select>
+
+    <select id="findCountryIdByName" resultType="java.lang.String">
+        select id from ly_country where name =#{country};
+    </select>
+
+    <update id="updateCountryStory">
+        update ly_country set name =#{name},img=#{img},create_time=#{time},story=#{story} where id=#{id}
+    </update>
+
+    <insert id="addCountryStory">
+        insert into ly_country (name,img,click,create_time,story) values (#{name},#{img},0,#{time},#{story})
+    </insert>
+
+    <delete id="delCountryStory">
+         delete from ly_country where id=#{id}
+    </delete>
+
+
+
 
     <select id="getCountryView" resultType="com.yaofen.bean.Country">
-        select cv.*,ct.name as belong from ly_countryview cv,ly_country ct where cv.country_id=ct.id limit #{page},#{limit};
+        select cv.*,ct.name as belong from ly_countryview cv,ly_country ct where cv.country_id=ct.id
+        <if test="name!=null and name!=''">
+            and cv.name like concat('%',#{name},'%')
+        </if>
+        <if test="img!=null and img!=''">
+            and cv.img like concat('%',#{img},'%')
+        </if>
+        limit #{page},#{limit};
     </select>
+
+    <update id="updateCountryView">
+        update ly_countryview set name =#{name},img=#{img},create_time=#{time},country_id=#{country} where id=#{id}
+    </update>
+
+    <insert id="addCountryView">
+        insert into ly_countryview (name,img,click,create_time,country_id) values (#{name},#{img},0,#{time},#{countryid})
+    </insert>
+
+    <delete id="delCountry">
+        delete from ly_countryview where id=#{id}
+    </delete>
+
+
+
+
+
+    <select id="getCountryEat" resultType="com.yaofen.bean.Country">
+        select ce.*,ct.name as belong from ly_countryeat ce,ly_country ct where ce.country_id=ct.id
+        <if test="name!=null and name!=''">
+            and ce.name like concat('%',#{name},'%')
+        </if>
+        <if test="img!=null and img!=''">
+            and ce.img like concat('%',#{img},'%')
+        </if>
+        limit #{page},#{limit};
+    </select>
+
+    <update id="updateCountryEat">
+        update ly_countryeat set name =#{name},img=#{img},detail=#{detail},country_id=#{country} where id=#{id}
+    </update>
+
+    <insert id="addCountryEat">
+        insert into ly_countryeat (name,img,click,detail,country_id) values (#{name},#{img},0,#{detail},#{countryid})
+    </insert>
+
+    <delete id="delCountryEat">
+        delete from ly_countryeat where id=#{id}
+    </delete>
+
+
+    <select id="getCountryNew" resultType="com.yaofen.bean.Country">
+        select cn.*,ct.name as belong from ly_countrynew cn,ly_country ct where cn.country_id=ct.id
+        <if test="name!=null and name!=''">
+            and cn.name like concat('%',#{name},'%')
+        </if>
+        <if test="img!=null and img!=''">
+            and cn.img like concat('%',#{img},'%')
+        </if>
+        limit #{page},#{limit};
+    </select>
+
+    <update id="updateCountryNew">
+        update ly_countrynew set name =#{name},img=#{img},create_time=#{time},country_id=#{country} where id=#{id}
+    </update>
+
+    <insert id="addCountryNew">
+        insert into ly_countrynew (name,img,click,create_time,country_id) values (#{name},#{img},0,#{time},#{countryid})
+    </insert>
+
+    <delete id="delCountryNew">
+        delete from ly_countrynew where id=#{id}
+    </delete>
+
+
+
+    <select id="getResource" resultType="com.yaofen.bean.Country">
+            <if test="type == 1">
+                select * from ly_countryview where id =#{id};
+            </if>
+            <if test="type == 2">
+                select * from ly_countryeat where id =#{id};
+            </if>
+            <if test="type == 3">
+                select * from ly_country where id =#{id};
+            </if>
+            <if test="type == 4">
+                select * from ly_countrynew where id =#{id};
+            </if>
+    </select>
+
+
+    <select id="getResourceList" resultType="com.yaofen.bean.Country">
+        <if test="type == 1">
+            select * from ly_countryview  ;
+        </if>
+        <if test="type == 2">
+            select * from ly_countryeat  ;
+        </if>
+        <if test="type == 3">
+            select * from ly_country ;
+        </if>
+        <if test="type == 4">
+            select * from ly_countrynew ;
+        </if>
+    </select>
+
+    <update id="updateCountryClick"  >
+        <if test="type == 1">
+            update ly_countryview set click =click+1  where id=#{id}
+        </if>
+        <if test="type == 2">
+            update ly_countryeat set click =click+1  where id=#{id}
+        </if>
+        <if test="type == 3">
+            update ly_country set click =click+1  where id=#{id}
+        </if>
+        <if test="type == 4">
+            update ly_countrynew set click =click+1  where id=#{id}
+        </if>
+    </update>
+
+    <update id="updateCountryGood"  >
+        <if test="type == 1">
+            update ly_countryview set good_num =good_num+1  where id=#{id}
+        </if>
+        <if test="type == 2">
+            update ly_countryeat set good_num =good_num+1  where id=#{id}
+        </if>
+        <if test="type == 3">
+            update ly_country set good_num =good_num+1  where id=#{id}
+        </if>
+        <if test="type == 4">
+            update ly_countrynew set good_num =good_num+1  where id=#{id}
+        </if>
+    </update>
+
+
+
 </mapper>

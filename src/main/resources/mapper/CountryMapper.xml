@@ -111,4 +111,69 @@
         delete from ly_countrynew where id=#{id}
     </delete>
 
+
+
+    <select id="getResource" resultType="com.yaofen.bean.Country">
+            <if test="type == 1">
+                select * from ly_countryview where id =#{id};
+            </if>
+            <if test="type == 2">
+                select * from ly_countryeat where id =#{id};
+            </if>
+            <if test="type == 3">
+                select * from ly_country where id =#{id};
+            </if>
+            <if test="type == 4">
+                select * from ly_countrynew where id =#{id};
+            </if>
+    </select>
+
+
+    <select id="getResourceList" resultType="com.yaofen.bean.Country">
+        <if test="type == 1">
+            select * from ly_countryview  ;
+        </if>
+        <if test="type == 2">
+            select * from ly_countryeat  ;
+        </if>
+        <if test="type == 3">
+            select * from ly_country ;
+        </if>
+        <if test="type == 4">
+            select * from ly_countrynew ;
+        </if>
+    </select>
+
+    <update id="updateCountryClick"  >
+        <if test="type == 1">
+            update ly_countryview set click =click+1  where id=#{id}
+        </if>
+        <if test="type == 2">
+            update ly_countryeat set click =click+1  where id=#{id}
+        </if>
+        <if test="type == 3">
+            update ly_country set click =click+1  where id=#{id}
+        </if>
+        <if test="type == 4">
+            update ly_countrynew set click =click+1  where id=#{id}
+        </if>
+    </update>
+
+    <update id="updateCountryGood"  >
+        <if test="type == 1">
+            update ly_countryview set good_num =good_num+1  where id=#{id}
+        </if>
+        <if test="type == 2">
+            update ly_countryeat set good_num =good_num+1  where id=#{id}
+        </if>
+        <if test="type == 3">
+            update ly_country set good_num =good_num+1  where id=#{id}
+        </if>
+        <if test="type == 4">
+            update ly_countrynew set good_num =good_num+1  where id=#{id}
+        </if>
+    </update>
+
+
+
 </mapper>

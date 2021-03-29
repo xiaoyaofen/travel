@@ -56,7 +56,7 @@ public class UserController {
         String coachName = request.getParameter("coachName");
         //判断该手机号是否被注册过
         boolean flags = true;
-        List<User> list = loginService.userList(0,100);
+        List<User> list = loginService.userList(0,100,null,null);
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getTel().equals(coachPhone)){
                 flags = false;

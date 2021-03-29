@@ -15,7 +15,7 @@
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 <script src="${pageContext.request.contextPath}/layui/layui.js" type="text/javascript"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/layui/jframe.js"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
 <meta name="format-detection" content="telephone=no,email=no,address=no">
 
@@ -32,13 +32,13 @@
 <link rel="shortcut icon" type="image/x-icon" href="http://cn.ganjiyihuo.com/favicon.ico">
 <link rel="bookmark" type="image/x-icon" href="http://cn.ganjiyihuo.com/favicon.ico">
 
-<title>乡村热点_中国美丽乡村旅游网</title>
+<title>乡村美景_中国美丽乡村旅游网</title>
 <meta name="Keywords" content="">
 <meta name="Description" content="">
 <link rel="stylesheet" type="text/css" href=" ../html/files/list.css">
 <link rel="stylesheet" type="text/css" href=" ../html/files/right.css">
 
-<!--<base target="_blank">--><base href="." target="_blank">
+<!--<base  >--><base href="."  >
 <script type="text/javascript" src=" ../html/files/qrcode.js"></script>
 
 <script src=" ../html/files/ti_u_5d92464c9a3c5f94.js"></script>
@@ -65,7 +65,7 @@
 
 
         <div class="hlgd-title">
-            <div class="hlgdttxt"><a href="http://cn.ganjiyihuo.com/list.asp?id=4">乡村热点</a></div>
+            <div class="hlgdttxt"><a href="/page/getCountryNew"> </a></div>
             <hr>
         </div>
 
@@ -73,36 +73,65 @@
         <div class="hlgd-content">
 
             <!--数据-->
-            <e:forEach items="${StoryList}"  var="item">
-                <c:if test="${StoryList!=null}">
+
+
+
+            <e:forEach items="${newList}"  var="item">
+                <c:if test="${newList!=null}">
                     <div class="hlgd-box">
                         <dl>
                             <dt class="dis">
-                                <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093">
+                                <a   href="${pageContext.request.contextPath}/page/getResource?type=4&id=${item.id}" onclick="pageRead(this)">
                                     <img width="250" height="165" border="0" alt="${item.name}" src="${item.img}">
                                 </a>
                             </dt>
-                            <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093"></a>
+                            <a   href="${pageContext.request.contextPath}/page/getResource?type=4&id=${item.id}" onclick="pageRead(this)"></a>
                             <dd class="">
-                                <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093"></a>
+                                <a  href="${pageContext.request.contextPath}/page/getResource?type=4&id=${item.id}" onclick="pageRead(this)"></a>
                                 <h3>
-                                    <a target="_blank" href="http://cn.ganjiyihuo.com/show.asp?id=1093">
+                                    <a   href="${pageContext.request.contextPath}/page/getResource?type=4&id=${item.id}" onclick="pageRead(this)">
                                 <span class="dj">
-                                乡村热点
+
                                 </span>
                                     </a>
-                                    <a href="http://cn.ganjiyihuo.com/show.asp?id=1093"><b>${item.name}</b></a>
+                                    <a href="${pageContext.request.contextPath}/page/getResource?type=4&id=${item.id}" onclick="pageRead(this)"><b>${item.name}</b></a>
                                 </h3>
 
                                 <p> ${item.detail} </p>
                                 <p>
-                                        ${item.createTime}   &nbsp;&nbsp;&nbsp;        浏览量：${item.click}
+                                        ${item.createTime}   &nbsp;&nbsp;&nbsp;        浏览量：${item.click} &nbsp;&nbsp;&nbsp;        点赞量<i class="layui-icon layui-icon-praise"></i>  ：${item.goodNum}
                                 </p>
                             </dd>
                         </dl>
                     </div>
                 </c:if>
             </e:forEach>
+
+
+
+
+            <%-- <div class="hlgd-box">
+                <dl>
+                    <dt class="dis">
+                        <a   href="http://cn.ganjiyihuo.com/show.asp?id=1094">
+                            <img width="250" height="165" border="0" alt="中国这条“普通”的国道，最美最低调" src=" ../html/files/nian.jpg">
+                        </a></dt><a   href="http://cn.ganjiyihuo.com/show.asp?id=1094">
+                </a><dd class=""><a   href="http://cn.ganjiyihuo.com/show.asp?id=1094">
+                </a><h3><a   href="http://cn.ganjiyihuo.com/show.asp?id=1094">
+                <span class="dj">
+                乡村美景
+                </span>
+                </a><a href="http://cn.ganjiyihuo.com/show.asp?id=1094"><b>
+                    中国这条“普通”的国道，最美最低调
+                </b></a></h3>
+                    <p>
+                        国道是国家干线公路的简称，每条公路干线常采用三位数字作编号来表示。在我国，很多国道都是无数自驾者心中最理想、最原味、最传奇的选择，就如国道318线，被誉为“中国人的景观大道”，这条国道横跨中国东中西部，..
+                    </p>
+                    <p>
+                        2018/11/16 10:06:30
+                    </p>
+                </dd></dl>
+            </div>--%>r
 
         </div>
 
@@ -111,17 +140,31 @@
 
 <script>
 
-    ////////////////////////////////////////////////修改界面
-    function  pageTurn(node) {
-        iframe = document.getElementById("iframe");
-        iframe.src=node.title;
-    }
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function(){
         var element = layui.element;
 
         //…
     });
+
+
+    function pageRead(){
+        /* $.ajax({
+             url:$("#path").val()+"page/getResource?type=4&id=${item.id}",
+            data:data.field,
+            method:'post',
+            dataType:'text',
+            success:function (data) {
+                if (data=="登陆成功"){
+                    layer.msg("登陆成功！");
+
+                }else{
+                    layer.msg(data);
+                }
+            }
+        });*/
+    }
+
 </script>
 
 

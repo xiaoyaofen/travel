@@ -103,4 +103,24 @@ public class CountryServiceImpl implements CountryService {
     public void delCountryNew(String id) {
         countryMapper.delCountryNew(id);
     }
+
+    @Override
+    public List<Country> getResource(String id, String type) {
+        return countryMapper.getResource(id,type);
+    }
+
+    @Override
+    public List<Country> getResourceList( String type) {
+        return countryMapper.getResourceList(type);
+    }
+
+    @Override
+    public void updateCountryClick(String id, String type) {
+        countryMapper.updateCountryClick(id,type);
+    }
+
+    @Override
+    public void updateCountryGood(String id, String type) {
+        countryMapper.updateCountryClick(id,type);
+    }
 }
