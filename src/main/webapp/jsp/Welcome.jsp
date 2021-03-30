@@ -218,7 +218,7 @@
                         <li><a  title="/page/getViewList" onclick="pageTurn(this)">乡村美景</a></li>
                         <li><a  title="/page/getCountryEat" onclick="pageTurn(this)">当地特产</a></li>
                         <li><a  title="/page/getCountryNew" onclick="pageTurn(this)">乡村热点</a></li>
-                        <li><a  title="/page/getCountryStory" onclick="pageTurn(this)">村镇领导</a></li>
+                        <li><a  title="/page/getCountryStory" onclick="pageTurn(this)">乡镇风采</a></li>
                     </td>
                 </tr>
                 </tbody></table>

@@ -17,9 +17,9 @@
 
 <div class="layui-carousel" id="test10" style="margin: 0px auto">
     <div carousel-item="">
-        <div><img height="500px" width="100%" src="http://www.zgmlxc.com.cn/uploads/1/image/public/201504/20150401184900_9jn0nx.jpg"></div>
-        <div><img  height="500px" width="100%"  src="http://www.zgmlxc.com.cn/uploads/1/image/public/201504/20150401185248_rm48ht.jpg"></div>
-        <div><img  height="500px" width="100%" src="http://www.zgmlxc.com.cn/uploads/1/image/public/201504/20150401185248_rm48ht.jpg"></div>
+        <div><img height="500px" width="100%" src="http://img.ewebweb.com/uploads/20191203/19/1575372345-gkLNxMmSjX.jpg"></div>
+        <div><img  height="500px" width="100%"  src="http://img.ewebweb.com/uploads/20191203/19/1575372339-TrdwlQbqJj.jpg"></div>
+        <div><img  height="500px" width="100%" src="http://img.ewebweb.com/uploads/20191203/19/1575372344-IsTqFtYUaK.jpg"></div>
         <div><img  height="500px" width="100%" src="http://www.zgmlxc.com.cn/uploads/1/image/public/201504/20150401185533_qbtxh6.jpg"></div>
     </div>
 </div>
