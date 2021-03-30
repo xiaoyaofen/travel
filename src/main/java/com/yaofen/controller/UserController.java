@@ -82,6 +82,37 @@ public class UserController {
         return msg;
     }
 
+    @RequestMapping(value = "/updateUserInfo", produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String updateUserInfo(HttpServletRequest request, HttpServletRequest resp){
+        String id = request.getParameter("id");
+        String email = request.getParameter("email");
+        String tel = request.getParameter("tel");
+        String account = request.getParameter("account");
+        String sex = request.getParameter("sex");
+        loginService.updateUserInfo(account,email,sex,tel,id);
+        return "success";
+    }
+
+    @RequestMapping(value = "/addUserOne", produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String addUser(HttpServletRequest request, HttpServletRequest resp){
+        String account = request.getParameter("account");
+        String tel = request.getParameter("tel");
+        String sex = request.getParameter("sex");
+        String email = request.getParameter("email");
+        loginService.addUser(account,email,sex,tel);
+        return "success";
+    }
+
+    @RequestMapping(value = "/delUser", produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String delUser(HttpServletRequest request, HttpServletRequest resp){
+        String id = request.getParameter("id");
+        loginService.delUser(id);
+        return "success";
+    }
+
 //    @RequestMapping(value = "/adminMenu", produces = "text/plain;charset=utf-8")
 //    public String adminMenu(HttpServletRequest request,HttpServletRequest resp){
 //        String account = request.getParameter("account");

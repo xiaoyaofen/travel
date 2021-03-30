@@ -215,7 +215,7 @@
             var sex=$("#sex2").val();
             var email=$("#email2").val();
             $.ajax({
-                url: '/user/addUser',
+                url: '/user/addUserOne',
                 data:  {"account": account, "tel": tel,"sex":sex,"email":email},
                 dataType: 'text',
                 type: 'get',
